@@ -1,0 +1,14 @@
+# Versao do compose
+version: "3"
+
+services:
+  app:
+    # local do dockerfile
+    build: .
+    # Comando que sera executado assim que a aplicacao subir
+    command: npm start
+    ports:
+      - "3000:3000"
+    # para qual pasta vai refletir as alteracoes
+    volumes:
+      - .:/usr/app

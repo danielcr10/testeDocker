@@ -1,0 +1,21 @@
+# Escolha da plataforma necessaria para rodar a aplicacao
+# Alpine eh a versao mais enxuta do node 
+# Quando se escolhe node ele puxa a versao mais recente
+FROM node:alpine
+
+# Diretorio do container onde vai ser instalada a aplicação
+WORKDIR /usr/app
+
+# Copia os arquivos package.json e package-lock.json para o diretorio WORKDIR do container
+COPY package*.json ./
+# Instala as depenciais do projeto no WORKDIR
+RUN npm install
+
+# Copia todos os arquivos restantes para dentro do WORKDIR, ignorando o que estiver no .dockerignore. Diretorio do Dockerfile para o WORKDIR
+COPY . .
+
+# Porta que o servidor vai expor para a maquina acessar (utilizada no node)
+EXPOSE 3000
+
+# Unica por Dockerfile. Comando necessario para a aplicação entrar no ar.
+CMD [ "npm", "start" ]
